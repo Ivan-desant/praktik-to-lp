@@ -32,3 +32,23 @@ if len(rs2) >0:
 else:
     print('Таких чисел в исходном массиве нет')
 
+#8.1
+ls10=[randint(10, 20) for i in range(10)]
+sls=sum(ls10)
+rp=1
+for l in ls10:
+    rp=rp*l
+print(f'Сумма всех чисел списка: {sls}, произведение всех чисел: {rp}')
+print()
+
+#8.2
+lst1=[uniform(0, 10) for i in range(10)]
+srz=sum(lst1)/10
+restup=[]
+print(lst1)
+for i in lst1:
+    if i<1:
+        restup.append(srz)
+    else:
+        restup.append(i)
+print(f'Новый массив {restup}')
