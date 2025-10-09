@@ -7,9 +7,13 @@ print(max(lists), '\n',
       f'Количество чисел больше максимального: {len([x for x in lists if x>max(lists)])}')
 print()
 #6.2
-ls1=[4, 6, 7, 12, 3, 10, 4, 22, 3, 1]
-result=sum(j for j in ls1 if j>5)
-print(f'Сумма чисел больших 5: {result}')
+print()
+ls1=input('Введи 10 циферок через пробел пожалуйста: ').split(' ')
+if len(ls1)==10:
+    result=sum(int(j) for j in ls1 if int(j)>5)
+    print(f'Сумма чисел больших 5: {result}')
+else:
+    print('Еще раз попробуй')
 print()
 
 #11.1
