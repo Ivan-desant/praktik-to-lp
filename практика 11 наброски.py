@@ -1,13 +1,13 @@
 from tkinter import *
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, filedialog
 from tkinter.ttk import Combobox
 root=Tk()
 root.title('Ижокин Иван Евгеньевич')
 root.geometry('450x360')
 
 style=ttk.Style()
-style.configure('TNotebook', tabposition='n')
-style.configure('TNotebook.Tab', padding=[49, 0, 49, 0])
+# style.configure('TNotebook', tabposition='n')
+style.configure('TNotebook.Tab', padding=[215, 10, 215, 10], widht=1500)
 
 tab_control=ttk.Notebook(root, style='TNotebook')
 tab1=ttk.Frame(tab_control)
@@ -27,8 +27,11 @@ def butfunc():
         num1=int(num1)
         num2=int(num2)
         if znak in '+-/*':
-            res=eval(f'{num1}{znak}{num2}')
-            labelres.configure(text=res)
+            try:
+                res=eval(f'{num1}{znak}{num2}')
+                labelres.configure(text=res)
+            except:
+                messagebox.showerror('Ошибка математика', 'ЛЕЕЕ на 0 делить нельзя')
         else:
             labelres.configure(text='Выберите оператор')
     except ValueError:
@@ -68,40 +71,25 @@ butprov.grid(column=0, row=3)
 lblres.grid(column=3, row=4)
 
 #3
-def input_file():
-    tfile=entfi.get()
-    text_file=''
-    try:
-        with open(tfile, 'r') as f:
-            for i in f:
-                text_file+=i
-        window=Toplevel()
-        window.title('Содержимое файла')
-        label_input=Label(window, text=text_file)
-        label_input.pack()
-    except:
-        messagebox.showerror('Ошибка', 'Такого файла нет')
-def help_menu():
-    lbl_help.config(text='Упс, пока не придумал')
-def menuframe():
-    but1=Button(tab3, text='Вывести содержимое', command=input_file)
-    but1.grid(column=0, row=3)
-    but2=Button(tab3, text='Еще', command=help_menu, width=18)
-    but2.grid(column=0, row=4)
-    def delet():
-        but1.grid_forget()
-        but2.grid_forget()
-        but3.grid_forget()
-        lbl_help.config(text='')
-        entfi.delete(0, 'end')
-    but3=Button(tab3, text='Выйти', command=delet, width=18)
-    but3.grid(column=0, row=5)
-entfi=Entry(tab3)
-lbl_file=Label(tab3, text='Файл:')
-butmenu=Button(tab3, text='Меню', command=menuframe, width=18)
-lbl_help=Label(tab3, text='')
-lbl_file.grid(column=0, row=0)
-entfi.grid(column=1, row=0)
-butmenu.grid(column=0, row=2)
-lbl_help.grid(column=0, row=6)
+def dopfunc():
+    field_txt.delete('1.0', END)
+    field_txt.insert('1.0', 'УПС, пока не придумал')
+def loadfile():
+    f=filedialog.askopenfilename()
+    if f:
+        file_input=''
+        with open(f, 'r') as files:
+            for i in files:
+                file_input+=i
+        field_txt.delete('1.0', END)
+        field_txt.insert('1.0', file_input)
+menur=Menu(root)
+new_item=Menu(menur)
+new_item.add_command(label='Загрузить', command=loadfile)
+new_item.add_separator()
+new_item.add_command(label='Еще', command=dopfunc)
+menur.add_cascade(label='Файл', menu=new_item)
+root.config(menu=menur)
+field_txt=Text(tab3, width=200, height=100, bg='white', fg='black', wrap='word')
+field_txt.pack()
 root.mainloop()
