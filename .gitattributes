@@ -1,0 +1,6 @@
+*.zip binary
+*.tar.gz binary
+*.rar binary
+*.zip linguist-vendored
+*.tar.gz linguist-vendored
+*.zip filter=lfs diff=lfs merge=lfs -text
