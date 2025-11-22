@@ -6,8 +6,8 @@ root.title('Ижокин Иван Евгеньевич')
 root.geometry('450x360')
 
 style=ttk.Style()
-# style.configure('TNotebook', tabposition='n')
-style.configure('TNotebook.Tab', padding=[215, 10, 215, 10], widht=1500)
+style.configure('TNotebook', tabposition='n')
+style.configure('TNotebook.Tab', padding=[20, 10, 20, 10], width=150, anchor='center')
 
 tab_control=ttk.Notebook(root, style='TNotebook')
 tab1=ttk.Frame(tab_control)
