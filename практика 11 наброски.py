@@ -55,15 +55,28 @@ resbut.grid(column=3, row=3)
 
 #2
 def butprovfunc():
-    txt=selected.get()
-    lblres.configure(text=f'Вы выбрали {txt}')
+    var_var=[]
+    if c1.get()==1:
+        var_var.append('первый вариант')
+    if c2.get()==1:
+        var_var.append('второй вариант')
+    if c3.get()==1:
+        var_var.append('третий вариант')
+    if var_var:
+        result=', '.join(var_var)
+        lblres.configure(text=f'Вы выбрали: {result}')
+    else:
+        lblres.configure(text='Неее, сначала выбери что-нибудь!')
+
 
 lblres=Label(tab2, text='')
 butprov=Button(tab2, text='Проверка', command=butprovfunc)
-selected=StringVar()
-chk1=Radiobutton(tab2, text='Первый', value='Первый вариант', variable=selected)
-chk2=Radiobutton(tab2, text='Второй', value='Второй вариант', variable=selected)
-chk3=Radiobutton(tab2, text='Третий', value='Третий вариант', variable=selected)
+c1=IntVar()
+c2=IntVar()
+c3=IntVar()
+chk1=Checkbutton(tab2, text='Первый вариант', variable=c1)
+chk2=Checkbutton(tab2, text='Второй вариант', variable=c2)
+chk3=Checkbutton(tab2, text='Третий вариант', variable=c3)
 chk1.grid(column=0, row=0)
 chk2.grid(column=0, row=1)
 chk3.grid(column=0, row=2)
